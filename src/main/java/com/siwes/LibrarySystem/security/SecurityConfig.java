@@ -21,10 +21,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final AuthenticationProvider authenticationProvider;
     private final JwtAuthFilter jwtAuthFilter;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDenialHandler jwtAccessDenialHandler;
+    private final AuthenticationProvider authenticationProvider;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http){
@@ -44,7 +44,7 @@ public class SecurityConfig {
                                 ex.authenticationEntryPoint(jwtAuthenticationEntryPoint)
                                         .accessDeniedHandler(jwtAccessDenialHandler)
                 )
-                .authenticationProvider(authentictionProvider)
+                .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
 
